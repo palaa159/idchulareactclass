@@ -4,10 +4,6 @@ import * as FBase from '../services/firebase'
 
 class Menu extends React.Component {
 
-  constructor (props) {
-    super(props)
-  }
-
   state = {
     user: {} // empty object
   }
@@ -35,14 +31,13 @@ class Menu extends React.Component {
           <div className="level-left">
             <div className="level-item">
               <p className="subtitle is-5">
-                <strong>นะโม</strong> โปรเจ็ค
+                โปรแกรมแชทโง่ๆ
               </p>
             </div>
           </div>
 
           <div className="level-right">
-            <p className="level-item"><Link to="/">👧 Friends</Link></p>
-            <p className="level-item"><Link to="/photos">😜 Photos</Link></p>
+            <p className="level-item"><Link to="/">👧 Chat</Link></p>
             <p className="level-item"><Link to="/profile">🍑 Profile</Link></p>
             <p className="level-item">
               {/* if... then... */}
