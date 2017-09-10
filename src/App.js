@@ -13,7 +13,7 @@ import * as FBase from './services/firebase'
 class App extends Component {
 
   state = { // Data model of THIS component
-    user: {}
+    user: null
   }
 
   componentDidMount () { // Behavior
@@ -32,6 +32,13 @@ class App extends Component {
     })
   }
 
+  async _signOut () {
+    const result = await FBase.logout()
+    this.setState({
+      user: null
+    })
+  }  
+
   render() { // Presentational
     return (
       <div>
@@ -39,6 +46,7 @@ class App extends Component {
           <div className="section" style={{ paddingTop: 20 }}>
             <Menu 
               onSignIn={this._signIn.bind(this)}
+              onSignOut={this._signOut.bind(this)}
               user={this.state.user}
             />
             <div style={{ height: 20 }}></div>

@@ -1,18 +1,34 @@
 import React from 'react'
+import * as FBase from '../services/firebase'
 
 class Chat extends React.Component {
 
   state = {
-    chatLog: ['this is the first message.. 🎈']
+    chatLog: {}
   }
   
   componentDidMount() {
-    
+    FBase.getChatLog()
+      .on('value', (snapshot) => {
+        console.log(snapshot.val())
+        this.setState({
+          chatLog: snapshot.val()
+        })
+      }
+    )
   }
 
   _send (msg) {
-    this.setState({
-      chatLog: [...this.state.chatLog, msg]
+    // this.setState({
+    //   chatLog: [...this.state.chatLog, msg]
+    // })
+    FBase.pushChat({ 
+      sender: {
+        displayName: this.props.user.displayName,
+        photoURL: this.props.user.photoURL
+      },
+      message: msg,
+      sentAt: new Date().getTime()
     })
     // console.log(this.state.chatLog)
   }
@@ -40,10 +56,10 @@ class Chat extends React.Component {
           </div>
         </div>
         <div className="chatFeed">
-          { this.state.chatLog.map((msg, i) =>
+          { Object.keys(this.state.chatLog).map((key, i) =>
               <div key={i}>
                 <img
-                  src={this.props.user.photoURL}
+                  src={this.state.chatLog[key].sender.photoURL}
                   style={{ 
                     width: 32, 
                     height: 32, 
@@ -52,7 +68,7 @@ class Chat extends React.Component {
                     verticalAlign: 'sub'
                   }} 
                 />
-                <span className="is-size-3"> {msg}</span>
+                <span className="is-size-3"> {this.state.chatLog[key].message}</span>
               </div>
             )
           }

@@ -23,10 +23,10 @@ class Menu extends React.Component {
             <p className="level-item"><Link to="/about">🍑 About</Link></p>
             <p className="level-item">
               {/* if... then... */}
-              { this.props.user.displayName === undefined &&
+              { !this.props.user &&
                 <button className="button" onClick={() => this.props.onSignIn()}>Sign-in</button>
               }
-              { this.props.user.displayName &&
+              { this.props.user &&
                 <span>
                   <img
                     src={this.props.user.photoURL}
@@ -39,7 +39,18 @@ class Menu extends React.Component {
                   />
                 </span>
               }
-              <span>{this.props.user.displayName}</span>
+              <span>
+                {this.props.user && this.props.user.displayName}&nbsp;
+              </span>
+              { this.props.user &&
+                <span>
+                  (
+                  <a onClick={this.props.onSignOut.bind(this)} className="is-size-8">
+                    Log out
+                  </a>
+                  )
+                </span>
+              }
             </p>
           </div>
         </nav>

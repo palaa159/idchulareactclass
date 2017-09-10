@@ -29,7 +29,32 @@ async function logout () {
 }
 
 function autoLogin (callback) {
-  auth().onAuthStateChanged((x) => callback(x))
+  return auth().onAuthStateChanged((x) => callback(x))
+}
+
+function pushChat ({ sender, photoURL, message, sentAt }) { // Add chat
+  /*
+    chatlog: [
+      {
+        sender: String,
+        photoURL: String,
+        message: String,
+        sentAt: Date
+      },
+      ...
+    ]
+  */
+  const ref = firebase.database().ref('/chatlog')
+  return ref.push({ sender, message, sentAt })
+}
+
+function getChatLog () {
+  // Will pull data automatically
+  return firebase.database().ref('/chatlog')
+}
+
+function clearChatLog () {
+
 }
 
 // Export as object {}
@@ -37,5 +62,7 @@ export {
   init,
   login,
   logout,
-  autoLogin
+  autoLogin,
+  getChatLog,
+  pushChat
 }
