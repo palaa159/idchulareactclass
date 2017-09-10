@@ -33,7 +33,7 @@ class Chat extends React.Component {
               }}
               className="input is-large"
               type="text"
-              placeholder="Type here" />
+              placeholder="Press enter to send" />
             <a className="icon is-medium is-right">
               <i className="fa fa-send"></i>
             </a>
