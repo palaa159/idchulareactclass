@@ -13,7 +13,7 @@ class Menu extends React.Component {
           <div className="level-left">
             <div className="level-item">
               <p className="subtitle is-5">
-                โปรแกรมแชทโง่ๆ
+                🐝 Beetalk v0.0.1
               </p>
             </div>
           </div>
