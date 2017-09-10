@@ -1,5 +1,6 @@
 import React from 'react'
 import * as FBase from '../services/firebase'
+import moment from 'moment'
 
 class Chat extends React.Component {
 
@@ -24,8 +25,8 @@ class Chat extends React.Component {
     // })
     FBase.pushChat({ 
       sender: {
-        displayName: this.props.user.displayName,
-        photoURL: this.props.user.photoURL
+        displayName: this.props.user && this.props.user.displayName,
+        photoURL: this.props.user && this.props.user.photoURL
       },
       message: msg,
       sentAt: new Date().getTime()
@@ -47,28 +48,36 @@ class Chat extends React.Component {
                   evt.target.value = ''
                 }
               }}
-              className="input is-large"
+              className="input is-warning is-large"
               type="text"
               placeholder="Press enter to send" />
-            <a className="icon is-medium is-right">
-              <i className="fa fa-send"></i>
-            </a>
           </div>
         </div>
         <div className="chatFeed">
-          { Object.keys(this.state.chatLog).map((key, i) =>
+          { this.state.chatLog && Object.keys(this.state.chatLog).map((key, i) =>
               <div key={i}>
-                <img
-                  src={this.state.chatLog[key].sender.photoURL}
-                  style={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    marginRight: 5,
-                    verticalAlign: 'sub'
-                  }} 
-                />
-                <span className="is-size-3"> {this.state.chatLog[key].message}</span>
+                { this.state.chatLog[key].sender &&
+                  <img
+                    src={this.state.chatLog[key].sender.photoURL}
+                    style={{ 
+                      width: 32, 
+                      height: 32, 
+                      borderRadius: '50%', 
+                      marginRight: 5,
+                      verticalAlign: 'sub'
+                    }} 
+                  />
+                }
+                { !this.state.chatLog[key].sender &&
+                  <span className="is-size-4">👮</span>
+                }
+                <span className="is-size-4"> {this.state.chatLog[key].message}</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span className="is-size-7 has-text-grey-lighter">
+                  <i className="fa fa-send is-inline"></i>
+                  &nbsp;
+                  {moment(this.state.chatLog[key].sentAt).fromNow()}
+                </span>
               </div>
             )
           }

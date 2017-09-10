@@ -18,6 +18,7 @@ class App extends Component {
 
   componentDidMount () { // Behavior
     FBase.autoLogin((x) => {
+      console.log(x)
       this.setState({
         user: x
       })
