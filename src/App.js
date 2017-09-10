@@ -9,6 +9,7 @@ import Chat from './Pages/Chat'
 import About from './Pages/About'
 // End of page components
 import * as FBase from './services/firebase'
+import { Helmet } from 'react-helmet'
 
 class App extends Component {
 
@@ -43,6 +44,9 @@ class App extends Component {
   render() { // Presentational
     return (
       <div>
+        <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Helmet>
         <BrowserRouter>
           <div className="section" style={{ paddingTop: 20 }}>
             <Menu 
