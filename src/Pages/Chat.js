@@ -54,7 +54,7 @@ class Chat extends React.Component {
           </div>
         </div>
         <div className="chatFeed">
-          { this.state.chatLog && Object.keys(this.state.chatLog).map((key, i) =>
+          { this.state.chatLog && Object.keys(this.state.chatLog).reverse().map((key, i) =>
               <div key={i}>
                 { this.state.chatLog[key].sender &&
                   <img
