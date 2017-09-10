@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 // Import page components
 import Menu from './Components/Menu'
 import Chat from './Pages/Chat'
-import Profile from './Pages/Profile'
+import About from './Pages/About'
 // End of page components
 import * as FBase from './services/firebase'
 
@@ -49,8 +49,8 @@ class App extends Component {
               path="/" 
               exact />
             <Route
-              render={(props) => <Profile {...props} />}
-              path="/profile" />
+              render={(props) => <About {...props} />}
+              path="/about" />
           </div>
         </BrowserRouter>
       </div>
