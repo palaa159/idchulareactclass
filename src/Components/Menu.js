@@ -1,27 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as FBase from '../services/firebase'
 
 class Menu extends React.Component {
 
-  state = {
-    user: {} // empty object
-  }
-
   componentDidMount () {
-    FBase.autoLogin((x) => {
-      this.setState({
-        user: x
-      })
-    })
-  }
-
-  async _signIn () {
-    const result = await FBase.login()
-    console.log(result.user)
-    this.setState({
-      user: result.user
-    })
   }
 
   render () {
@@ -41,13 +23,13 @@ class Menu extends React.Component {
             <p className="level-item"><Link to="/profile">🍑 Profile</Link></p>
             <p className="level-item">
               {/* if... then... */}
-              { this.state.user.displayName === undefined &&
-                <button className="button" onClick={() => this._signIn()}>Sign-in</button>
+              { this.props.user.displayName === undefined &&
+                <button className="button" onClick={() => this.props.onSignIn()}>Sign-in</button>
               }
-              { this.state.user.displayName &&
+              { this.props.user.displayName &&
                 <span>
                   <img
-                    src={this.state.user.photoURL}
+                    src={this.props.user.photoURL}
                     style={{ 
                       width: 32, 
                       height: 32, 
@@ -57,7 +39,7 @@ class Menu extends React.Component {
                   />
                 </span>
               }
-              <span>{this.state.user.displayName}</span>
+              <span>{this.props.user.displayName}</span>
             </p>
           </div>
         </nav>
