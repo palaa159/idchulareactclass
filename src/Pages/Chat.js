@@ -98,8 +98,7 @@ class Chat extends React.Component {
                       id: ${this.state.chatLog[key].sender.id}
                     `)}
                     className="is-size-4">{this.state.users[this.state.chatLog[key].sender.id].emoji}</span>
-                  <span className="is-size-4"> {this.state.chatLog[key].message}</span>
-                  <span>&nbsp;&nbsp;&nbsp;</span>
+                  <span className="is-size-4" style={{ marginRight: 4 }}> {this.state.chatLog[key].message}</span>
                   <span className="is-size-7 has-text-grey-lighter">
                     <i className="fa fa-send is-inline"></i>
                     &nbsp;

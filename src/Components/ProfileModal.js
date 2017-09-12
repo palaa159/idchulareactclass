@@ -3,7 +3,7 @@ import React from 'react'
 class ProfileModal extends React.Component {
 
   state = {
-    avataji: ['👻', '🐨', '🐋', '🐯', '🦇', '🦏', '👽', '🎱', '💯']
+    avataji: ['👻', '🐨', '🐋', '🐯', '🦇', '🦏', '👽', '🎱', '💯', '🥇', '💄', '🍥', '🍣', '🦁']
   }
 
   render () {

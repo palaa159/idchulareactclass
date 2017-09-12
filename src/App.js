@@ -77,6 +77,7 @@ class App extends Component {
     return (
       <div>
         <Helmet>
+          <title>🐐 Avataji 🥑</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Helmet>
         <ProfileModal
