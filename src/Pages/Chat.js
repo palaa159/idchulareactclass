@@ -44,33 +44,33 @@ class Chat extends React.Component {
   render () {
     // Build display logic
     return (
-      <div className="columns">
-        <div className="column">
-          <div className="content">
-            <h2>Users:</h2>
-            { this.state.users && Object.keys(this.state.users)
-                // .reverse()
-                .sort((key) => this.state.users[key].status)
-                .map((key, i) =>
-                  <div key={i} onClick={() => alert(`
+      <div className="container">
+        <div style={{ marginBottom: 10 }}>
+          { this.state.users && Object.keys(this.state.users)
+              // .reverse()
+              .sort((a, b) => this.state.users[a].status - this.state.users[b].status)
+              .map((key, i) =>
+                <span key={i}>
+                  { this.props.userId === key &&
+                    <span>☝️ </span>
+                  }
+                  <span 
+                    onClick={() => alert(`
                       ${this.state.users[key].emoji}
                       id: ${key}
                       last_seen: ${moment(this.state.users[key].lastSeen).fromNow()}
-                    `)}>
-                    { this.props.userId === key &&
-                      <span>☝️ </span>
-                    }
-                    <span className="is-size-4">{this.state.users[key].emoji} </span>
-                    <span className="tag is-rounded">
-                      {this.state.users[key].status === 'online' ? '💚 ' : ''}
-                      {this.state.users[key].status}
-                    </span>
-                  </div>
-              )
-            }
-          </div>
+                    `)}
+                    className="is-size-4">{this.state.users[key].emoji} </span>
+                  <span className="tag is-rounded" style={{ position: 'relative', top: -5 }}>
+                    {this.state.users[key].status === 'online' ? '💚 ' : ''}
+                    {this.state.users[key].status}
+                  </span>
+                  &nbsp;&nbsp;&nbsp;
+                </span>
+            )
+          }
         </div>
-        <div className="column is-9 chatContainer">
+        <div className="chatContainer">
           <div className="chatInput field">
             <div className="control is-large has-icons-right">
               <input
@@ -91,11 +91,13 @@ class Chat extends React.Component {
                 <div 
                   className="chatLine" 
                   key={i} 
-                  onClick={() => alert(`
-                    ${this.state.users[this.state.chatLog[key].sender.id].emoji}
-                    id: ${this.state.chatLog[key].sender.id}
-                  `)}>
-                  <span className="is-size-4">{this.state.users[this.state.chatLog[key].sender.id].emoji}</span>
+                  >
+                  <span 
+                    onClick={() => alert(`
+                      ${this.state.users[this.state.chatLog[key].sender.id].emoji}
+                      id: ${this.state.chatLog[key].sender.id}
+                    `)}
+                    className="is-size-4">{this.state.users[this.state.chatLog[key].sender.id].emoji}</span>
                   <span className="is-size-4"> {this.state.chatLog[key].message}</span>
                   <span>&nbsp;&nbsp;&nbsp;</span>
                   <span className="is-size-7 has-text-grey-lighter">
