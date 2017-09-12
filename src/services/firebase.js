@@ -57,6 +57,14 @@ function clearChatLog () {
 
 }
 
+function user (userId, path = '') {
+  return firebase.database().ref(`/user/${userId}/${path}`)
+}
+
+function getUsers () {
+  return firebase.database().ref(`/user`)
+}
+
 // Export as object {}
 export {
   init,
@@ -64,5 +72,7 @@ export {
   logout,
   autoLogin,
   getChatLog,
-  pushChat
+  pushChat,
+  user,
+  getUsers
 }

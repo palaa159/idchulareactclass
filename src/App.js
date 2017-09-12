@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Menu from './Components/Menu'
 import Chat from './Pages/Chat'
 import About from './Pages/About'
+import ProfileModal from './Components/ProfileModal'
 // End of page components
 import * as FBase from './services/firebase'
 import { Helmet } from 'react-helmet'
@@ -14,15 +15,27 @@ import { Helmet } from 'react-helmet'
 class App extends Component {
 
   state = { // Data model of THIS component
-    user: null
+    user: null,
+    userId: null,
+    isModalActive: true
   }
 
   componentDidMount () { // Behavior
-    FBase.autoLogin((x) => {
-      console.log(x)
-      this.setState({
-        user: x
-      })
+    // FBase.autoLogin((x) => {
+    //   console.log(x)
+    //   this.setState({
+    //     user: x
+    //   })
+    // })
+    // Inject localStorage
+    let userId = new Date().getTime()
+    console.log(window.localStorage['avataji'])
+    if (window.localStorage && !window.localStorage['avataji']) {
+      window.localStorage['avataji'] = userId // initial
+    }
+    
+    this.setState({
+      userId: window.localStorage['avataji']
     })
   }
 
@@ -39,7 +52,26 @@ class App extends Component {
     this.setState({
       user: null
     })
-  }  
+  } 
+
+   _selectAvatji (emoji) {
+    console.log(emoji)
+    // Put user of `userId` online
+    FBase.user(this.state.userId).update({
+      status: 'online',
+      emoji: emoji,
+      lastLogin: new Date().getTime()
+    }, (err) => {
+      console.log(err)
+      FBase.user(this.state.userId).onDisconnect().update({
+        lastSeen: new Date().getTime(),
+        status: 'offline'
+      })
+      this.setState({
+        isModalActive: false
+      })
+    })
+   }
 
   render() { // Presentational
     return (
@@ -47,6 +79,10 @@ class App extends Component {
         <Helmet>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Helmet>
+        <ProfileModal
+          onSelectAvataji={this._selectAvatji.bind(this)}
+          isActive={this.state.isModalActive}
+        />
         <BrowserRouter>
           <div className="section" style={{ paddingTop: 20 }}>
             <Menu 
@@ -57,7 +93,7 @@ class App extends Component {
             <div style={{ height: 20 }}></div>
             <Route
               render={() => 
-                <Chat user={this.state.user} />
+                <Chat user={this.state.user} userId={this.state.userId} />
               }
               path="/" 
               exact />

@@ -13,7 +13,7 @@ class Menu extends React.Component {
           <div className="level-left">
             <div className="level-item">
               <p className="subtitle is-5">
-                🐝🙊
+                🌔 😂
               </p>
             </div>
           </div>
@@ -23,9 +23,9 @@ class Menu extends React.Component {
             <p className="level-item"><Link to="/about">🍑 About</Link></p>
             <p className="level-item">
               {/* if... then... */}
-              { !this.props.user &&
+              {/* { !this.props.user &&
                 <button className="button" onClick={() => this.props.onSignIn()}>Sign-in</button>
-              }
+              } */}
               { this.props.user &&
                 <span>
                   <img
@@ -39,16 +39,14 @@ class Menu extends React.Component {
                   />
                 </span>
               }
-              <span>
+              {/* <span>
                 {this.props.user && this.props.user.displayName}&nbsp;
-              </span>
+              </span> */}
               { this.props.user &&
                 <span>
-                  (
                   <a onClick={this.props.onSignOut.bind(this)} className="is-size-8">
                     Log out
                   </a>
-                  )
                 </span>
               }
             </p>

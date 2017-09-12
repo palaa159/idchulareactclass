@@ -1,5 +1,7 @@
-.chatContainer {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+.chatLine {
+  /* display: inline-block */
+}
+
+.avatajiBtn {
+  margin: 4px
 }
