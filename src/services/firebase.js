@@ -32,10 +32,20 @@ function autoLogin (callback) {
   auth().onAuthStateChanged((x) => callback(x))
 }
 
+function getData(path) {
+  return firebase.database().ref(path)
+}
+
+function setData(path, data) {
+  return firebase.database().ref(path).set(data)
+}
+
 // Export as object {}
 export {
   init,
   login,
   logout,
-  autoLogin
+  autoLogin,
+  getData,
+  setData
 }

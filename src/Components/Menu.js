@@ -21,26 +21,31 @@ class Menu extends React.Component {
           <div className="level-right">
             <p className="level-item"><Link to="/">👧 Chat</Link></p>
             <p className="level-item"><Link to="/about">🍑 About</Link></p>
-            <p className="level-item">
+            <div className="level-item">
               {/* if... then... */}
-              { this.props.user.displayName === undefined &&
+              { !this.props.user &&
                 <button className="button" onClick={() => this.props.onSignIn()}>Sign-in</button>
               }
-              { this.props.user.displayName &&
-                <span>
-                  <img
-                    src={this.props.user.photoURL}
-                    style={{ 
-                      width: 32, 
-                      height: 32, 
-                      borderRadius: '50%', 
-                      marginRight: 5 
-                    }} 
-                  />
-                </span>
+              { this.props.user &&
+                <div>
+                  <span>
+                    <img
+                      src={this.props.user.photoURL}
+                      style={{ 
+                        width: 32, 
+                        height: 32, 
+                        borderRadius: '50%', 
+                        marginRight: 5 
+                      }} 
+                    />
+                  </span>
+                  <span style={{ top: 7, position: 'relative' }}>
+                    {this.props.user.displayName}
+                  </span>
+                  <button onClick={this.props.onSignOut.bind(this)} className="button">Log out</button>
+                </div>
               }
-              <span>{this.props.user.displayName}</span>
-            </p>
+            </div>
           </div>
         </nav>
       </div>      
