@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-
+//
 const config = {
   apiKey: "AIzaSyBJc_bqk13PnAyx3wPTk3cyw-iOxc__ayI",
   authDomain: "namoproject-e5062.firebaseapp.com",
