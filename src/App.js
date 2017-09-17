@@ -7,6 +7,8 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Menu from './Components/Menu'
 import Chat from './Pages/Chat'
 import About from './Pages/About'
+import RandomExam from './Pages/RandomExam'
+import Map from './Pages/Map'
 // End of page components
 import * as FBase from './services/firebase'
 import { Helmet } from 'react-helmet'
@@ -64,6 +66,12 @@ class App extends Component {
             <Route
               render={(props) => <About {...props} />}
               path="/about" />
+            <Route
+              render={(props) => <RandomExam {...props} />}
+              path="/random" />
+            <Route
+              render={(props) => <Map {...props} />}
+              path="/map" />
           </div>
         </BrowserRouter>
       </div>
